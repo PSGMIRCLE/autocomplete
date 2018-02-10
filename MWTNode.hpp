@@ -10,7 +10,7 @@ class MWTNode {
 
 public: 
 
-  unordered_map<char, MWTNode*> table;
+  unordered_map<string, MWTNode*> table;
   bool isWord;
   int count;
   MWTNode * parent;
@@ -20,10 +20,6 @@ public:
   ~MWTNode() {
     table.clear();
   }
-
-private:
-
-  
 
 };
 

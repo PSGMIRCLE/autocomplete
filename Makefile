@@ -11,12 +11,17 @@ CXXFLAGS= -g -Wall -std=c++11
 #include debugging symbols in executable
 LDFLAGS= -g	
 
-default: main 
+default: main
 
 main: main.o
 	g++ -o main main.o
 
+test: test.o
+	g++ -o test test.o
+
 main.o: main.cpp Autocomplete.hpp
+
+test.o: test.cpp MWT.hpp MWTNode.hpp
 
 Autocomplete.o: Autocomplete.hpp MWT.hpp MWTNode.hpp
 

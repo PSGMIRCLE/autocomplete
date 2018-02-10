@@ -9,19 +9,30 @@ using namespace std;
 
 class MWT {
 
-protected:
+public: 
 
   MWTNode * root;
 
-public: 
-
-  MWT(const vector<string> words) : root(0) {
+  MWT(const vector<string> words) {
     root = new MWTNode();
     build(words);
   }
 
   ~MWT() {
     delete root;
+  }
+
+  bool find(string word) {
+    MWTNode* curr = root;
+    for(unsigned int i = 0; i < word.length(); i++) {
+      string letter = "" + word[i];
+      //if character key doesn't exist
+      if(curr->table.find(letter) == curr->table.end()) {
+        return false;
+      }
+      curr = curr->table[letter];
+    }
+    return curr->isWord;
   }
 
 private:
@@ -34,25 +45,23 @@ private:
       MWTNode* curr = root;
       for(unsigned int i = 0; i < s.length(); i++) {
 
+        string letter = "" + s[i];
         //if key doesn't exist yet
-        if(curr->table.find(s[i]) == curr->table.end()) {
+        if(curr->table.find(letter) == curr->table.end()) {
           //insert key and create new MWTNode
-          curr->table[s[i]] = new MWTNode();
+          curr->table[letter] = new MWTNode();
           //set the new child's parent as curr
-          curr->table[s[i]]->parent = curr;
+          curr->table[letter]->parent = curr;
         }
         //go to next MWTNode
-        curr = curr->table[s[i]];
-
-        //if last character of string
-        if(i == s.length() - 1) {
-          //set next node as a word node (exclusive) and update count
-          curr->isWord = true;
-          curr->count++;
-        }
+        curr = curr->table[letter];
       }
+      //set next node as a word node and update count
+      curr->isWord = true;
+      curr->count++;
     }
   }
+
 };
 
 #endif //MWT_HPP
