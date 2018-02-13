@@ -22,6 +22,33 @@ public:
     delete root;
   }
 
+  //gets an existing word
+  MWTNode* getWord(string word) {
+    if(!find(word)) {
+      return nullptr;
+    }
+    MWTNode* curr = root;
+    for(unsigned int i = 0; i < word.length(); i++) {
+      string letter = "" + word[i];
+      curr = curr->table[letter];
+    }
+    return curr;
+  }
+
+  //gets any node within the MWT regardless of if it exists
+  MWTNode* getNode(string word) {
+    MWTNode* curr = root;
+    for(unsigned int i = 0; i < word.length(); i++) {
+      string letter = "" + word[i];
+      //if node doesn't exist
+      if(curr->table.find(letter) == curr->table.end()) {
+        return nullptr;
+      }
+      curr = curr->table[letter];
+    }
+    return curr;
+  }
+
   bool find(string word) {
     MWTNode* curr = root;
     for(unsigned int i = 0; i < word.length(); i++) {
@@ -33,6 +60,20 @@ public:
       curr = curr->table[letter];
     }
     return curr->isWord;
+  }
+
+  int count(string word) {
+    //if word doesn't exist in MWT
+    if(!find(word)) {
+      return 0;
+    }
+    MWTNode* curr = root;
+    //iterate to last node
+    for(unsigned int i = 0; i < word.length(); i++) {
+      string letter = "" + word[i];
+      curr = curr->table[letter];
+    }
+    return curr->count;
   }
 
 private:
@@ -50,8 +91,6 @@ private:
         if(curr->table.find(letter) == curr->table.end()) {
           //insert key and create new MWTNode
           curr->table[letter] = new MWTNode();
-          //set the new child's parent as curr
-          curr->table[letter]->parent = curr;
         }
         //go to next MWTNode
         curr = curr->table[letter];
@@ -59,6 +98,7 @@ private:
       //set next node as a word node and update count
       curr->isWord = true;
       curr->count++;
+      curr->word = s;
     }
   }
 

@@ -12,10 +12,10 @@ public:
 
   unordered_map<string, MWTNode*> table;
   bool isWord;
+  string word = "";
   int count;
-  MWTNode * parent;
 
-  MWTNode() : isWord(false), count(0), parent(0) {}
+  MWTNode() : isWord(false), count(0) {}
 
   ~MWTNode() {
     table.clear();
