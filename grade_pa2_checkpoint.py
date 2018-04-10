@@ -4,7 +4,7 @@ Grading script for PA2 (BST)
 Jonathan Margoliash
 Based on grading script from  Dylan McNamara, Niema Moshiri
 '''
-from subprocess import Popen, check_output, PIPE, TimeoutExpired
+from subprocess import Popen, check_output, PIPE, TimeoutExpired, CalledProcessError
 import time
 import sys
 import os

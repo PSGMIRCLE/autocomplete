@@ -3,6 +3,9 @@
 
 #include <string>
 #include <fstream>
+#include <vector>
+#include <iostream>
+
 using namespace std;
 
 namespace AutocompleteUtils {
@@ -28,6 +31,8 @@ namespace AutocompleteUtils {
   }
 
   //load a file and return a vector of all the words in that file
+  //this function only splits the contents of the file over whitespace
+  //and does not make exceptions for punctuation or unwanted characters
   vector<string> getWords(const string fileLocation) {
     vector<string> words;
 

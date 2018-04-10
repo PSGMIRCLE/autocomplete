@@ -10,15 +10,19 @@ class MWTNode {
 
 public: 
 
-  unordered_map<string, MWTNode*> table;
+  //backing hash table to store children
+  unordered_map<char, MWTNode*>* table;
   bool isWord;
   string word = "";
   int count;
 
-  MWTNode() : isWord(false), count(0) {}
+  MWTNode() : isWord(false), count(0) {
+    //initialize table
+    table = new unordered_map<char, MWTNode*>();
+  }
 
   ~MWTNode() {
-    table.clear();
+    delete table;
   }
 
 };

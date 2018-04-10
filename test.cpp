@@ -127,11 +127,8 @@ int main() {
 
   vector<string> completions2 = tester2->predictCompletions(prefix);
 
-  auto it2 = completions2.begin();
-  auto en2 = completions2.end();
-
-  for(; it2 != en2; it2++) {
-    cout << *it2 << endl;
+  for(string s : completions2) {
+    cout << s << endl;
   }
 
   cout << "\t" << completions2.size() << " completions found" << endl << endl;
