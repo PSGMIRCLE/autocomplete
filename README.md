@@ -1,5 +1,3 @@
-# autocomplete
-
 Autocomplete
 ============
 
